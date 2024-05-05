@@ -1,7 +1,7 @@
 const marketPlaceService = require('./marketplace-service');
 const { errorResponder, errorTypes } = require('../../../core/errors');
 
-//Create
+//membuat marketplace
 async function createMarketPlace(request, response, next) {
   try {
     const name = request.body.name;
@@ -10,22 +10,28 @@ async function createMarketPlace(request, response, next) {
     const price = request.body.price;
     const quantity = request.body.quantity;
 
-
-    const success = await marketPlaceService.createMarketPlace(name, category, description, price, quantity);
+    const success = await marketPlaceService.createMarketPlace(
+      name,
+      category,
+      description,
+      price,
+      quantity
+    );
     if (!success) {
       throw errorResponder(
         errorTypes.UNPROCESSABLE_ENTITY,
         'Failed to create MarketPlace'
       );
     }
-    return response.status(200).json({ name, category, description, price, quantity });
-
+    return response
+      .status(200)
+      .json({ name, category, description, price, quantity });
   } catch (error) {
     return next(error);
   }
 }
 
-//Read
+//mendapatkan info produk
 async function getMarketPlaces(request, response, next) {
   try {
     const marketplaces = await marketPlaceService.getMarketPlaces();
@@ -35,7 +41,7 @@ async function getMarketPlaces(request, response, next) {
   }
 }
 
-//Update
+//mengupdate informasi produk
 async function updateMarketPlace(request, response, next) {
   try {
     const id = request.params.id;
@@ -45,7 +51,14 @@ async function updateMarketPlace(request, response, next) {
     const price = request.body.price;
     const quantity = request.body.quantity;
 
-    const success = await marketPlaceService.updateMarketPlace(id, name, category, description, price, quantity);
+    const success = await marketPlaceService.updateMarketPlace(
+      id,
+      name,
+      category,
+      description,
+      price,
+      quantity
+    );
     if (!success) {
       throw errorResponder(
         errorTypes.UNPROCESSABLE_ENTITY,
@@ -59,7 +72,7 @@ async function updateMarketPlace(request, response, next) {
   }
 }
 
-//Delete
+//menghapus informasi produk
 async function deleteMarketPlace(request, response, next) {
   try {
     const id = request.params.id;
@@ -82,5 +95,5 @@ module.exports = {
   createMarketPlace,
   getMarketPlaces,
   updateMarketPlace,
-  deleteMarketPlace
+  deleteMarketPlace,
 };

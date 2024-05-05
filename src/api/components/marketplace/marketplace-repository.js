@@ -1,23 +1,30 @@
-const { MarketPlace } = require('../../../models')
+const { MarketPlace } = require('../../../models');
 
-//Create Marketplace
+//Membuat informasi suatu produk
 async function createMarketPlace(name, category, description, price, quantity) {
   return MarketPlace.create({
     name,
     category,
     description,
     price,
-    quantity
+    quantity,
   });
 }
 
-//Read Marketplace
+//mendapatkan informasi produk
 async function getMarketplace() {
   return MarketPlace.find({});
 }
 
-//Update Marketplace
-async function updateMarketPlace(id, name, category, description, price, quantity) {
+//menambahkan atau memperbaiki informasi produk
+async function updateMarketPlace(
+  id,
+  name,
+  category,
+  description,
+  price,
+  quantity
+) {
   return MarketPlace.updateOne(
     {
       _id: id,
@@ -28,13 +35,13 @@ async function updateMarketPlace(id, name, category, description, price, quantit
         category,
         description,
         price,
-        quantity
+        quantity,
       },
     }
   );
 }
 
-//Delete Marketplace
+//menghapus info produk
 async function deleteMarketPlace(id) {
   return MarketPlace.deleteOne({ _id: id });
 }
@@ -43,5 +50,5 @@ module.exports = {
   createMarketPlace,
   getMarketplace,
   updateMarketPlace,
-  deleteMarketPlace
+  deleteMarketPlace,
 };

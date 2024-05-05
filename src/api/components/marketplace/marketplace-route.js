@@ -6,11 +6,10 @@ const marketPlaceValidator = require('./marketplace-validator');
 
 const route = express.Router();
 
-
 module.exports = (app) => {
   app.use('/marketplace', route);
 
-  // Create Marketplace
+  // Membuat Marketplace Toko
   route.post(
     '/',
     authenticationMiddleware,
@@ -18,18 +17,24 @@ module.exports = (app) => {
     marketPlaceController.createMarketPlace
   );
 
-  // Read Marketplace
-  route.get('/', authenticationMiddleware, marketPlaceController.getMarketPlaces);
+  // Mendapatkan info soal stok barang
+  route.get(
+    '/',
+    authenticationMiddleware,
+    marketPlaceController.getMarketPlaces
+  );
 
-
-  // Update Marketplace
+  // Menambahkan atau memperbaiki info produk
   route.put(
     '/:id',
     authenticationMiddleware,
     marketPlaceController.updateMarketPlace
   );
 
-  // Delete Marketplace
-  route.delete('/:id', authenticationMiddleware, marketPlaceController.deleteMarketPlace);
-
-}
+  // Menghapus info suatu produk
+  route.delete(
+    '/:id',
+    authenticationMiddleware,
+    marketPlaceController.deleteMarketPlace
+  );
+};

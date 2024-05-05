@@ -1,10 +1,15 @@
 const marketPlaceRepository = require('./marketplace-repository');
 
-
-//Create
+//membuat
 async function createMarketPlace(name, category, description, price, quantity) {
   try {
-    await marketPlaceRepository.createMarketPlace(name, category, description, price, quantity);
+    await marketPlaceRepository.createMarketPlace(
+      name,
+      category,
+      description,
+      price,
+      quantity
+    );
   } catch (err) {
     return null;
   }
@@ -12,7 +17,7 @@ async function createMarketPlace(name, category, description, price, quantity) {
   return true;
 }
 
-//Read 
+//membaca
 async function getMarketPlaces() {
   const marketplaces = await marketPlaceRepository.getMarketplace();
 
@@ -25,15 +30,22 @@ async function getMarketPlaces() {
       category: marketplace.category,
       description: marketplace.description,
       price: marketplace.price,
-      quantity: marketplace.quantity
+      quantity: marketplace.quantity,
     });
   }
 
   return results;
 }
 
-//Update
-async function updateMarketPlace(id, name, category, description, price, quantity) {
+//Update stok
+async function updateMarketPlace(
+  id,
+  name,
+  category,
+  description,
+  price,
+  quantity
+) {
   const marketplace = await marketPlaceRepository.getMarketplace(id);
 
   if (!marketplace) {
@@ -41,7 +53,14 @@ async function updateMarketPlace(id, name, category, description, price, quantit
   }
 
   try {
-    await marketPlaceRepository.updateMarketPlace(id, name, category, description, price, quantity);
+    await marketPlaceRepository.updateMarketPlace(
+      id,
+      name,
+      category,
+      description,
+      price,
+      quantity
+    );
   } catch (err) {
     return null;
   }
@@ -49,7 +68,7 @@ async function updateMarketPlace(id, name, category, description, price, quantit
   return true;
 }
 
-//Delete
+//menghapus info produk
 async function deleteMarketPlace(id) {
   const marketplace = await marketPlaceRepository.getMarketplace(id);
 
@@ -70,5 +89,5 @@ module.exports = {
   createMarketPlace,
   getMarketPlaces,
   updateMarketPlace,
-  deleteMarketPlace
+  deleteMarketPlace,
 };

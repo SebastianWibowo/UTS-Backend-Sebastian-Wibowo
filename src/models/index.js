@@ -4,7 +4,6 @@ const logger = require('../core/logger')('app');
 
 const usersSchema = require('./users-schema');
 const marketplaceSchema = require('./marketPlace-schema');
-const digitalBankingSchema = require('./digitalBanking-schema');
 
 mongoose.connect(`${config.database.connection}/${config.database.name}`, {
   useNewUrlParser: true,
@@ -16,14 +15,13 @@ db.once('open', () => {
 });
 
 const User = mongoose.model('users', mongoose.Schema(usersSchema));
-const MarketPlace = mongoose.model('marketplace', mongoose.Schema(marketplaceSchema))
-const DigitalBanking = mongoose.model('digitalbanking', mongoose.Schema(digitalBankingSchema))
-
-
+const MarketPlace = mongoose.model(
+  'marketplace',
+  mongoose.Schema(marketplaceSchema)
+);
 
 module.exports = {
   mongoose,
   User,
   MarketPlace,
-  DigitalBanking
 };
