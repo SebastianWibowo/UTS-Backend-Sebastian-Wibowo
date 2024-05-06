@@ -9,7 +9,7 @@ const route = express.Router();
 module.exports = (app) => {
   app.use('/marketplace', route);
 
-  // Membuat Marketplace Toko
+  // Membuat Info Stok Produk dalam Toko
   route.post(
     '/',
     authenticationMiddleware,
